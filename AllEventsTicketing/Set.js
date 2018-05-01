@@ -39,8 +39,8 @@ function Set() {
 		}
 
         var intersection  = this.intersection(listA, listB);
-        var symetric  = this.symmetricDifference(listA, listB);
-        resultList = intersection.concat(symetric);
+        var symetricDifference  = this.symmetricDifference(listA, listB);
+        resultList = intersection.concat(symetricDifference);
 
         /*-------------------------------Insert your code here -------------------------------------*/
 	   
@@ -90,9 +90,9 @@ function Set() {
             return null;
         }
 
-        var result1  = this.relativeComplement(listA, listB);
-        var result2  = this.relativeComplement(listB, listA);
-        resultList = result1.concat(result2);
+        var complement1  = this.relativeComplement(listA, listB);
+        var complement2  = this.relativeComplement(listB, listA);
+        resultList =complement1.concat(complement2);
 
 	   /*-------------------------------Insert your code here -------------------------------------*/
        
