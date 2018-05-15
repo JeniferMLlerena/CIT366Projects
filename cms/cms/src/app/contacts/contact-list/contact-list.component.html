@@ -1,0 +1,53 @@
+<div class="panel planel-default" style="border: 1px solid lightgray;">
+  <div class="panel-heading" style="background-color: whitesmoke;">
+    <div class="row pad-left-right" style="padding-right: 10px; padding-left: 10px;">
+      <div class="span pull-left title"><span style="font-size: 25px; font-weight: bold">Contacts</span></div>
+      <button class="btn btn-success pull-right">New Contact</button>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-12">
+        <a *ngFor="let contact of contacts" class="list-group-item clearfix">
+          <div class="pull-left">
+            <span class="list-group-item-heading" style="...">{{ contact?.name }}</span>
+          </div>
+          <span class="pull-right">
+            <img
+              [src]="contact.imageUrl"
+              alt="{{ contact.contactId }}"
+              class="img-responsive"
+              style="max-height: 50px;">
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!--<div class="row">
+  <div class="col-xs-12">
+    <h1>Contacts</h1>
+    <button class="btn btn-success">New Contact</button>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <a href="#"
+       class="list-group-item clearfix"
+       *ngFor="let contact of contacts" >
+      <div class="pull-left">
+        <h4 class="list-group-item-heading">{{ contact.name }}</h4>
+      </div>
+      <span class="pull-right">
+        <img
+          [src]="contact.imageUrl"
+          alt="{{ contact.contactId }}"
+          class="img-responsive"
+          style="max-height: 50px;">
+      </span>
+    </a>
+  </div>
+</div>-->
