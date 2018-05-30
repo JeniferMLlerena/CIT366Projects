@@ -1,30 +1,17 @@
-<div class="panel planel-default" style="border: 1px solid lightgray;">
-  <div class="panel-heading" style="background-color: whitesmoke">
-    <h3>{{ contact?.name }}</h3>
-    <div class="row pad-all" style="padding-right: 10px; padding-left: 10px;">
-      <div class="clear-fix pull-left">
-        <img class="img-responsive" src="{{contact?.imageUrl}}" style="..." />
-      </div>
-      <div class="pull-right" style="...">
-        <button class="btn btn-primary" style="margin: 5px;">Edit</button>
-        <button class="btn btn-danger">Delete</button>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2>{{contact.name}}</h2>
+    <div class="flex-container">
+      <img src="{{contact.imageUrl}}" alt="{{contact.name}}">
+      <div>
+        <a class="btn btn-primary">Edit</a>
+        <a class="btn btn-danger">Delete</a>
       </div>
     </div>
   </div>
-
   <div class="panel-body">
-    <div class="pad-left-right">
-      <!--<div class="row" *ngIf="contact?.email">-->
-      <div class="row">
-        <label style="padding-left: 10px;">Email:</label>
-        <span class="label-value">{{ contact?.email }}</span>
-      </div>
-
-      <!--<div class="row" *ngIf="contact?.phone">-->
-      <div class="row">
-        <label style="padding-left: 10px;">Phone:</label>
-        <span class="label-value">{{ contact?.phone }}</span>
-      </div>
-    </div>
+    <div><strong>Email:</strong> {{contact.email}}</div>
+    <div><strong>Phone:</strong> {{contact.phone}}</div>
   </div>
 </div>
+

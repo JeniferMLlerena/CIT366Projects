@@ -9,7 +9,7 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-xs-12">
-        <a *ngFor="let contact of contacts" class="list-group-item clearfix">
+        <!--<a *ngFor="let contact of contacts" class="list-group-item clearfix">
           <div class="pull-left">
             <span class="list-group-item-heading" style="...">{{ contact?.name }}</span>
           </div>
@@ -20,7 +20,12 @@
               class="img-responsive"
               style="max-height: 50px;">
           </span>
-        </a>
+        </a>-->
+        <app-contact-item
+          *ngFor="let contactD of contacts"
+          [contact]="contactD"
+          (click)="onSelected(contactD)">
+        </app-contact-item>
       </div>
     </div>
   </div>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Contact } from './contact-list/contact.model';
 
 @Component({
   selector: 'app-contacts',
@@ -8,15 +7,34 @@ import { Contact } from './contact-list/contact.model';
 })
 export class ContactsComponent implements OnInit {
   selectedContact: Contact;
-  displayList = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  toggleList() {
-    this.displayList = !this.displayList;
-  }
+}
 
+export class Contact {
+  contactId: number;
+  name: string;
+  email: string;
+  phone: string;
+  imageUrl: string;
+  group: Contact[];
+
+  constructor(
+    contactId: number,
+    name: string,
+    email: string,
+    phone: string,
+    imageUrl: string,
+    group: Contact[]) {
+    this.contactId = contactId;
+    this.name = name;
+    this.email = email;
+    this.phone = phone;
+    this.imageUrl = imageUrl;
+    this.group = group;
+  }
 }
