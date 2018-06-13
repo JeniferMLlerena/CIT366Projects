@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MessageListComponent } from './message-list.component';
 
 describe('MessageListComponent', () => {

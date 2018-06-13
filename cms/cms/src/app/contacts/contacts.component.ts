@@ -1,40 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
+import { ContactService } from './contact.service';
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.css']
 })
-export class ContactsComponent implements OnInit {
-  selectedContact: Contact;
 
-  constructor() { }
+export class ContactsComponent implements OnInit {
+
+  selectedContact: Contact;
+  subscription: any;
+
+  constructor(private contactService: ContactService) { }
 
   ngOnInit() {
+    this.subscription = this.contactService.contactSelectedEvent
+      .subscribe(contact => {
+        this.selectedContact = contact;
+      });
   }
-
 }
 
+@Injectable()
 export class Contact {
-  contactId: number;
-  name: string;
-  email: string;
-  phone: string;
-  imageUrl: string;
-  group: Contact[];
-
-  constructor(
-    contactId: number,
-    name: string,
-    email: string,
-    phone: string,
-    imageUrl: string,
-    group: Contact[]) {
-    this.contactId = contactId;
-    this.name = name;
-    this.email = email;
-    this.phone = phone;
-    this.imageUrl = imageUrl;
-    this.group = group;
-  }
+    constructor(
+      public id: string,
+      public name: string,
+      public email: string,
+      public phone: string,
+      public imageUrl: string,
+      public group: Contact[]) {
+      }
 }
