@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DocumentDetailComponent } from './document-detail.component';
 
 describe('DocumentDetailComponent', () => {
@@ -23,3 +22,4 @@ describe('DocumentDetailComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

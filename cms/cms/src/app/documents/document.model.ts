@@ -19,3 +19,4 @@ export class Document {
     this.children = children;
   }
 }
+
