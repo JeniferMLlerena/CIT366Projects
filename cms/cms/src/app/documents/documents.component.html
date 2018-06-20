@@ -1,10 +1,12 @@
 <div class="row">
   <div class="col-md-6">
+    <!--<app-document-list></app-document-list>-->
     <app-document-list></app-document-list>
   </div>
   <div class="col-md-6">
-    <app-document-detail
+    <!--<app-document-detail
       [document]="selectedDocument"
-      *ngIf="selectedDocument"></app-document-detail>
+      *ngIf="selectedDocument"></app-document-detail>-->
+    <router-outlet></router-outlet>
   </div>
 </div>
