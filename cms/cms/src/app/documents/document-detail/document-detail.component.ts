@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Document } from '../document.model'
-import { DocumentService } from './../document.service';
-import { ActivatedRoute, Router, Params } from '@angular/router';
-import { WindRefService } from './../../wind-ref.service';
+import { Component, OnInit } from '@angular/core';
+import { Document } from '../document.model';
+import { DocumentService } from '../document.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { WindRefService } from '../../wind-ref.service';
 
 @Component({
   selector: 'app-document-detail',
@@ -10,22 +10,36 @@ import { WindRefService } from './../../wind-ref.service';
   styleUrls: ['./document-detail.component.css']
 })
 export class DocumentDetailComponent implements OnInit {
-  //@Input()
-  nativeWindow: any;
+  //@input
   document: Document;
-  id: string;
+
+  nativeWindow: any;
+
   constructor(private documentService: DocumentService,
-              private route: ActivatedRoute,
               private router: Router,
-              private windRefService: WindRefService) {
-    this.nativeWindow = this.windRefService.getNativeWindow();
+              private activatedRoute: ActivatedRoute,
+              private windRef: WindRefService) {
+    this.nativeWindow = this.windRef.getNativeWindow();
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      this.id = params['id'];
-      this.document = this.documentService.getDocument(this.id);
-    });
+    this.activatedRoute.params
+      .subscribe(
+        (params) => {
+          this.document = this.documentService.getDocument(params.id);
+        }
+      );
+  }
+
+  onView() {
+    if (this.document.url) {
+      this.nativeWindow.open(this.document.url);
+    }
+  }
+
+  onDelete() {
+    this.documentService.deleteDocument(this.document);
+    this.router.navigate(['documents']);
   }
 
 }

@@ -20,11 +20,15 @@
               class="img-responsive"
               style="max-height: 50px;">
           </span>
-        </a>-->
+        </a>
         <app-contact-item
           *ngFor="let contactD of contacts"
           [contact]="contactD"
           (click)="onSelected(contactD)">
+        </app-contact-item>-->
+        <app-contact-item
+          *ngFor="let contactD of contacts"
+          [contact]="contactD">
         </app-contact-item>
       </div>
     </div>
