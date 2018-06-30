@@ -11,7 +11,8 @@ export class Document {
     description: String,
     url: String,
     children: Array<any> = []
-  ) {
+  )
+  {
     this.id = id;
     this.name = name;
     this.description = description;
