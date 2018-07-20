@@ -12,6 +12,7 @@ export class ContactListComponent implements OnInit {
 
   contacts: Contact[] = [];
   subscription: Subscription;
+  term: string = '';
 
   constructor(private contactService: ContactService) { }
 
@@ -25,7 +26,9 @@ export class ContactListComponent implements OnInit {
     this.contacts = this.contactService.getContacts();
   }
 
-
+  onKeyPress(value: string) {
+    this.term = value;
+  }
   /*onSelected(contact: Contact) {
     this.contactService.contactSelectedEvent.emit(contact);
   }*/
