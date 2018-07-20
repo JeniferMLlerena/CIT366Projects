@@ -2,7 +2,8 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
 import { Contact } from './contacts.component';
 import { Subject } from 'rxjs/Subject';
-
+import {Document} from "../documents/document.model";
+import { HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 
 @Injectable()
 export class ContactService {
@@ -11,16 +12,27 @@ export class ContactService {
 
   contactSelectedEvent = new EventEmitter<Contact>();
   contactChangedEvent = new EventEmitter<Contact[]>();
-
   contactListChangedEvent = new Subject<Contact[]>();
   maxId: number;
 
-  constructor() {
-    this.contacts = MOCKCONTACTS;
+  constructor(private http:HttpClient) {
+    //this.contacts = MOCKCONTACTS;
     this.maxId = this.getMaxId();
   }
 
   getContacts(): Contact[] {
+    this.http.get('https://cit366-jeni.firebaseio.com/contacts.json')
+      .subscribe(
+        //success function
+        (contacts: Contact[]) => {
+          this.contacts = contacts;
+          this.maxId = this.getMaxId();
+          this.contactListChangedEvent.next(this.contacts.slice())
+        });
+    //error function
+    (error: any) => {
+      console.log(error);
+    }
     return this.contacts.slice();
   }
 
@@ -47,7 +59,8 @@ export class ContactService {
       newDoc.id = `${this.maxId++}`;
       this.contacts.push(newDoc);
       let contactsClone = this.contacts.slice();
-      this.contactListChangedEvent.next(contactsClone);
+      //this.contactListChangedEvent.next(contactsClone);
+      this.storeContacts();
     }
   }
 
@@ -61,7 +74,8 @@ export class ContactService {
         newContact.id = originalContact.id;
         this.contacts[pos] = newContact;
         let contactsClone = this.contacts.slice();
-        this.contactListChangedEvent.next(contactsClone);
+        //this.contactListChangedEvent.next(contactsClone);
+        this.storeContacts();
       }
     }
   }
@@ -73,7 +87,19 @@ export class ContactService {
 
     const pos = this.contacts.indexOf(contact);
     let contactsClone = this.contacts.slice();
-    this.contactListChangedEvent.next(contactsClone);
+    //this.contactListChangedEvent.next(contactsClone);
+    this.storeContacts();
   }
 
+  //Function that will call the Document object when something is add/delete or modify
+  storeContacts() {
+    let stringToServer = JSON.stringify(this.contacts);
+    let header = new HttpHeaders({
+      "Content-Type":"application/json"
+    });
+    this.http.put('https://cit366-jeni.firebaseio.com/documents.json', stringToServer,{headers:header})
+      .subscribe(result => {
+        this.contactListChangedEvent.next(Object.assign(this.contacts));
+      });
+  }
 }
